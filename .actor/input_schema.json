@@ -1,0 +1,31 @@
+{
+    "title": "Company Buying Signal Report Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "companies": {
+            "title": "Companies",
+            "type": "array",
+            "editor": "json",
+            "description": "One entry per company. `domain` is required. `greenhouseSlug`/`leverSlug` are optional — if omitted, the actor guesses a slug from the domain, which works for some companies and not others.",
+            "prefill": [
+                { "domain": "stripe.com", "greenhouseSlug": "stripe" },
+                { "domain": "palantir.com", "leverSlug": "palantir" }
+            ]
+        },
+        "roleKeywords": {
+            "title": "Notable role keywords",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Open roles whose title contains one of these (case-insensitive) count as a stronger hiring signal. Leave empty to treat any open role the same.",
+            "prefill": ["sales", "account executive", "engineer", "growth", "marketing"]
+        },
+        "fetchContactPage": {
+            "title": "Also fetch a linked contact/about page",
+            "type": "boolean",
+            "description": "If a link to a contact/about page is found on the homepage, fetch it too to improve contact-info coverage. Adds one extra request per company.",
+            "default": true
+        }
+    },
+    "required": ["companies"]
+}

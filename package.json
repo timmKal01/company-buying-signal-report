@@ -1,0 +1,16 @@
+{
+    "name": "company-buying-signal-report",
+    "version": "0.1.0",
+    "type": "module",
+    "description": "Combine hiring signal (Greenhouse/Lever), tech stack fingerprint, and public contact info into one buying-signal report per company.",
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "dependencies": {
+        "apify": "^3.2.6",
+        "cheerio": "^1.0.0"
+    },
+    "scripts": {
+        "start": "node src/main.js"
+    }
+}
