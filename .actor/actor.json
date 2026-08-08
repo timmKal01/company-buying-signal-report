@@ -1,7 +1,7 @@
 {
     "actorSpecification": 1,
     "name": "company-buying-signal-report",
-    "title": "Company Buying Signal Report - Hiring, Tech Stack & Contact in One Row",
+    "title": "Company Buying Signal Report — Hiring, Tech & Contact",
     "description": "Give it a list of company domains. Get back one combined sales-trigger row per company: open roles from Greenhouse/Lever, tech stack fingerprint, best public contact, and a computed buying-signal score.",
     "version": "0.1",
     "meta": {
