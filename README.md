@@ -18,7 +18,9 @@ sortable "who to call first" list.
 
 Built for SDRs and sales teams prioritizing a target-account list, agencies
 scoping prospects before outreach, and market researchers tracking
-tech-adoption + hiring trends together.
+tech-adoption + hiring trends together. A 100-account target list normally
+means three separate tool exports and a manual join in a spreadsheet before
+anyone can rank who to call first — this returns the ranked list directly.
 
 ## Input
 
