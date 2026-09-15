@@ -8,7 +8,7 @@ import { computeSignal } from './scoring.js';
 await Actor.init();
 
 const input = (await Actor.getInput()) ?? {};
-const { companies = [], roleKeywords = [], fetchContactPage = true } = input;
+const { companies = [{ domain: 'stripe.com', greenhouseSlug: 'stripe' }, { domain: 'palantir.com', leverSlug: 'palantir' }], roleKeywords = [], fetchContactPage = true } = input;
 
 if (companies.length === 0) {
     throw new Error('No companies provided.');

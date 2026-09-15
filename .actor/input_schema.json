@@ -26,6 +26,5 @@
             "description": "If a link to a contact/about page is found on the homepage, fetch it too to improve contact-info coverage. Adds one extra request per company.",
             "default": true
         }
-    },
-    "required": ["companies"]
+    }
 }
