@@ -3,11 +3,31 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
+        "domain": {
+            "title": "Company domain",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Domain of the single company to analyze (e.g. \"stripe.com\"). Leave this blank if you're using the \"Companies (multiple)\" field below instead.",
+            "prefill": "stripe.com"
+        },
+        "greenhouseSlug": {
+            "title": "Greenhouse slug (optional)",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Only used together with Company domain above. The company's identifier in its Greenhouse board URL, e.g. https://boards.greenhouse.io/stripe -> \"stripe\".",
+            "prefill": "stripe"
+        },
+        "leverSlug": {
+            "title": "Lever slug (optional)",
+            "type": "string",
+            "editor": "textfield",
+            "description": "Only used together with Company domain above. The company's identifier in its Lever board URL, e.g. https://jobs.lever.co/palantir -> \"palantir\"."
+        },
         "companies": {
-            "title": "Companies",
+            "title": "Companies (multiple)",
             "type": "array",
             "editor": "json",
-            "description": "One entry per company. `domain` is required. `greenhouseSlug`/`leverSlug` are optional — if omitted, the actor guesses a slug from the domain, which works for some companies and not others.",
+            "description": "For analyzing a list of companies in one run instead of one at a time. One entry per company, `domain` is required, `greenhouseSlug`/`leverSlug` are optional. Ignored if Company domain above is filled in.",
             "prefill": [
                 { "domain": "stripe.com", "greenhouseSlug": "stripe" },
                 { "domain": "palantir.com", "leverSlug": "palantir" }
