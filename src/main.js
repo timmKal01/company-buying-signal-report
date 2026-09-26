@@ -8,11 +8,16 @@ import { computeSignal } from './scoring.js';
 await Actor.init();
 
 const input = (await Actor.getInput()) ?? {};
-const { companies = [{ domain: 'stripe.com', greenhouseSlug: 'stripe' }, { domain: 'palantir.com', leverSlug: 'palantir' }], roleKeywords = [], fetchContactPage = true } = input;
+const { domain: singleDomain, greenhouseSlug, leverSlug, companies: companiesInput, roleKeywords = [], fetchContactPage = true } = input;
 
-if (companies.length === 0) {
-    throw new Error('No companies provided.');
-}
+// The single-company fields (domain/greenhouseSlug/leverSlug) exist so a Store visitor never has
+// to touch the raw JSON "companies" editor just to check one company. They take priority when
+// filled in; "companies" is for the bulk/multi-company case.
+const companies = singleDomain
+    ? [{ domain: singleDomain, greenhouseSlug, leverSlug }]
+    : companiesInput?.length
+        ? companiesInput
+        : [{ domain: 'stripe.com', greenhouseSlug: 'stripe' }, { domain: 'palantir.com', leverSlug: 'palantir' }];
 
 /** Must match the event name configured in this Actor's pay-per-event pricing on Apify. */
 const COMPANY_REPORT_EVENT = 'company-report';

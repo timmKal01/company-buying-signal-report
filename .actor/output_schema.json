@@ -1,6 +1,6 @@
 {
     "actorOutputSchemaVersion": 1,
-    "title": "Output schema of Company Buying Signal Report — Hiring, Tech & Contact",
+    "title": "Output schema of Company Buying Signal Report: Hiring, Tech & Contact",
     "description": "Results are pushed to the default dataset, one record per item.",
     "properties": {
         "results": {
