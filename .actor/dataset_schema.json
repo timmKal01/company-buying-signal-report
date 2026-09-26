@@ -1,0 +1,83 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "domain",
+                    "signalStrength",
+                    "signalScore",
+                    "signalReasons",
+                    "hiring.ats",
+                    "hiring.openRolesCount",
+                    "hiring.notableRoles",
+                    "techStack.jsFrameworks",
+                    "techStack.analytics",
+                    "techStack.payment",
+                    "contact.emails",
+                    "contact.phones"
+                ],
+                "flatten": [
+                    "hiring",
+                    "techStack",
+                    "contact"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "domain": {
+                        "label": "Domain",
+                        "format": "text"
+                    },
+                    "signalStrength": {
+                        "label": "Signal strength",
+                        "format": "text"
+                    },
+                    "signalScore": {
+                        "label": "Signal score",
+                        "format": "number"
+                    },
+                    "signalReasons": {
+                        "label": "Signal reasons",
+                        "format": "array"
+                    },
+                    "hiring.ats": {
+                        "label": "Hiring: ATS",
+                        "format": "text"
+                    },
+                    "hiring.openRolesCount": {
+                        "label": "Hiring: open roles count",
+                        "format": "number"
+                    },
+                    "hiring.notableRoles": {
+                        "label": "Hiring: notable roles",
+                        "format": "array"
+                    },
+                    "techStack.jsFrameworks": {
+                        "label": "Tech stack: JS frameworks",
+                        "format": "array"
+                    },
+                    "techStack.analytics": {
+                        "label": "Tech stack: analytics",
+                        "format": "array"
+                    },
+                    "techStack.payment": {
+                        "label": "Tech stack: payment",
+                        "format": "array"
+                    },
+                    "contact.emails": {
+                        "label": "Contact: emails",
+                        "format": "array"
+                    },
+                    "contact.phones": {
+                        "label": "Contact: phones",
+                        "format": "array"
+                    }
+                }
+            }
+        }
+    }
+}
