@@ -118,6 +118,6 @@ because it replaces three separate tool runs with one.
 Need just one signal instead of the combined report? Same underlying
 methods, standalone:
 
-- [Company Hiring Tracker](https://github.com/timmKal01/company-hiring-tracker) — hiring signal only, full job list per board
-- [Website Tech Stack Detector](https://github.com/timmKal01/website-tech-stack-detector) — tech fingerprint only, deeper signature set
-- [Website Lead Extractor](https://github.com/timmKal01/website-lead-extractor) — contact info only, with configurable crawl depth
+- [Company Job Openings Tracker](https://apify.com/m_ctim/company-hiring-tracker): hiring signal only, full job list per board
+- [Website Tech Stack Checker](https://apify.com/m_ctim/website-tech-stack-detector): tech fingerprint only, deeper signature set
+- [Website Email & Phone Extractor for Lead Gen](https://apify.com/m_ctim/website-lead-extractor): contact info only, with configurable crawl depth
