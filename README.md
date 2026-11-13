@@ -1,4 +1,4 @@
-# Company Buying Signal Report — Hiring, Tech Stack & Contact in One Row
+# Company Buying Signals: Hiring, Tech & Contacts
 
 Give it a list of company domains. Get back one row per company combining
 three sales-relevant signals that would otherwise mean stitching together
@@ -9,8 +9,8 @@ three separate tools:
   titles)
 - **Tech stack fingerprint** — CMS, ecommerce platform, analytics, payment,
   and live-chat tools detected from the homepage
-- **Public contact info** — email, phone, and social profiles from the
-  homepage and a linked contact/about page
+- **Public contact info** — the company's own business emails, phone and
+  social profiles from the homepage and a linked contact/about page
 
 ...plus a computed **buying-signal score** (`low`/`medium`/`high`) with the
 specific reasons behind it, so you're not just getting three raw feeds but a
@@ -51,41 +51,47 @@ explicitly (findable on their careers page URL) for a guaranteed hit.
 
 One record per company:
 
+A real row from a local test run on 2026-11-13 (`roleKeywords` from the example input; the role lists are shortened):
+
 ```json
 {
+  "rowType": "company",
   "domain": "stripe.com",
   "hiring": {
     "ats": "greenhouse",
     "slug": "stripe",
-    "openRolesCount": 142,
-    "notableRoles": ["Account Executive, Bridge", "Senior Software Engineer"],
-    "roles": [{ "title": "Account Executive, Bridge", "location": "London", "url": "https://stripe.com/jobs/..." }]
+    "openRolesCount": 788,
+    "notableRoles": ["Account Executive, AI Sales", "..."],
+    "roles": [{ "title": "Abuse Investigator", "location": "Seattle, San Francisco, New York City", "url": "https://stripe.com/jobs/search?gh_jid=8172510" }]
   },
   "techStack": {
     "cms": [],
     "ecommerce": [],
-    "jsFrameworks": ["React"],
-    "analytics": ["Google Analytics", "Segment"],
-    "cdnHosting": ["Cloudflare"],
-    "payment": ["Stripe"],
-    "liveChat": ["Intercom"]
+    "jsFrameworks": ["Next.js"],
+    "analytics": [],
+    "cdnHosting": [],
+    "payment": [],
+    "liveChat": []
   },
   "contact": {
-    "emails": ["press@stripe.com"],
-    "phones": [],
-    "socialProfiles": { "linkedin": "https://linkedin.com/company/stripe" }
+    "emails": [],
+    "phones": ["+1 888 926 2289"],
+    "socialProfiles": { "github": "https://github.com/stripe" }
   },
   "signalStrength": "high",
   "signalScore": 4,
   "signalReasons": [
-    "142 open roles (actively scaling)",
-    "2 role(s) match notable keywords",
-    "uses paid ecommerce/payment/chat/analytics tooling",
+    "788 open roles (actively scaling)",
+    "407 role(s) match notable keywords",
     "public contact info found"
   ],
-  "analyzedAt": "2026-08-07T00:00:00.000Z"
+  "homepageError": null,
+  "hiringError": null,
+  "analyzedAt": "2026-11-13T09:40:06.029Z"
 }
 ```
+
+`rowType` is `"company"`. If the homepage or the job board can't be read, the row says why in `homepageError` or `hiringError`. A company where neither could be read, or an entry with no domain, comes back as a free `"error"` row instead, with the reason.
 
 ## How it works
 
@@ -97,13 +103,17 @@ headless browser:
 - **Tech stack**: signature matching (response headers, meta tags, script
   sources) against the homepage HTML — the same technique tools like
   Wappalyzer use.
-- **Contact info**: regex extraction over the homepage (and one linked
-  contact/about page) for emails, phone numbers, and social links — nothing
-  behind a login, nothing a browser wouldn't show any visitor.
+- **Contact info**: the homepage (and one linked contact/about page) for
+  emails, phone numbers, and social links — nothing behind a login, nothing a
+  browser wouldn't show any visitor. Only the company's own addresses are
+  kept: generic mailboxes (`info@`, `sales@`, `press@`...) and addresses
+  carrying the company's name. An address that looks like one person's own
+  mailbox is left out, even when the site publishes it. Phones need an
+  unambiguous format, so order numbers and dates aren't mistaken for them.
 
 ## Pricing note
 
-Billed per **company report**, not per sub-signal — one charge whether the
+$0.007 per **company report**, not per sub-signal — one charge whether the
 company has 3 open roles or 300, and regardless of how many tech-stack
 signatures or contact fields matched. Priced above a single-source lookup
 because it replaces three separate tool runs with one.
@@ -113,11 +123,11 @@ because it replaces three separate tool runs with one.
 | Hiring-only actor + tech-stack actor + lead-extractor actor, run separately | 3 runs, 3 line items, manual joining |
 | This actor | 1 run, 1 row per company, already joined |
 
+Error rows (nothing could be read, or no domain given) are free.
+
 ## Related products
 
-Need just one signal instead of the combined report? Same underlying
-methods, standalone:
+Need one signal in depth instead of the combined report?
 
-- [Company Job Openings Tracker](https://apify.com/m_ctim/company-hiring-tracker): hiring signal only, full job list per board
-- [Website Tech Stack Checker](https://apify.com/m_ctim/website-tech-stack-detector): tech fingerprint only, deeper signature set
-- [Website Email & Phone Extractor for Lead Gen](https://apify.com/m_ctim/website-lead-extractor): contact info only, with configurable crawl depth
+- [ATS & Remote Jobs Scraper](https://apify.com/m_ctim/ats-jobs-aggregator): every open job from a company's Workday, Greenhouse, Lever, Ashby or Workable board, with a hiring monitor
+- [Tech Stack Detector & Lead Finder](https://apify.com/m_ctim/tech-stack-lead-finder): 124 technologies per site, or sites filtered by the tools they use, with business contacts

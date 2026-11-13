@@ -6,6 +6,7 @@
             "title": "Overview",
             "transformation": {
                 "fields": [
+                    "rowType",
                     "domain",
                     "signalStrength",
                     "signalScore",
@@ -17,7 +18,8 @@
                     "techStack.analytics",
                     "techStack.payment",
                     "contact.emails",
-                    "contact.phones"
+                    "contact.phones",
+                    "error"
                 ],
                 "flatten": [
                     "hiring",
@@ -75,6 +77,14 @@
                     "contact.phones": {
                         "label": "Contact: phones",
                         "format": "array"
+                    },
+                    "rowType": {
+                        "label": "Row",
+                        "format": "text"
+                    },
+                    "error": {
+                        "label": "Error (not charged)",
+                        "format": "text"
                     }
                 }
             }

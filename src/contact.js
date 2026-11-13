@@ -1,8 +1,5 @@
 import * as cheerio from 'cheerio';
-
-const EMAIL_RE = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
-const PHONE_RE = /(?:\+\d{1,3}[\s.-]?)?(?:\(\d{2,4}\)[\s.-]?)?\d{2,4}[\s.-]\d{3,4}[\s.-]\d{3,4}/g;
-const IMAGE_EXT_RE = /\.(png|jpe?g|gif|svg|webp)(?:@|$)/i;
+import { businessEmails, extractEmails, extractPhones, hrefs, visibleText } from './contactRules.js';
 
 const SOCIAL_DOMAINS = {
     linkedin: /linkedin\.com/i,
@@ -14,12 +11,17 @@ const SOCIAL_DOMAINS = {
 
 const CONTACT_LINK_RE = /contact|about/i;
 
-export function extractContactInfo($) {
-    // .clone() so removing script/style doesn't mutate the shared document —
-    // detectTechStack() and findContactPageLink() still need the originals.
-    const bodyText = $('body').clone().find('script, style').remove().end().text();
-    const emails = [...new Set((bodyText.match(EMAIL_RE) ?? []).filter((e) => !IMAGE_EXT_RE.test(e)))];
-    const phones = [...new Set(bodyText.match(PHONE_RE) ?? [])].filter((p) => p.replace(/\D/g, '').length >= 7);
+/**
+ * Contact details a company publishes on one page. Since 2026-11-13 (when the actor came back from retirement):
+ * emails and phones use the stricter rules from tech-stack-lead-finder (no next word glued onto an address, no order
+ * numbers or dates read as phones), and only the business's own addresses are kept: generic mailboxes (info@,
+ * sales@...) and addresses carrying the company's name, never an address that may be one person's own mailbox.
+ */
+export function extractContactInfo($, pageUrl) {
+    const links = hrefs($, pageUrl);
+    const text = visibleText($);
+    const emails = businessEmails(extractEmails(text, links.filter((h) => /^mailto:/i.test(h))), pageUrl);
+    const phones = extractPhones(text, links.filter((h) => /^tel:/i.test(h)));
 
     const socialProfiles = {};
     $('a[href]').each((_, el) => {

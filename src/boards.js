@@ -1,4 +1,4 @@
-const USER_AGENT = 'CompanyBuyingSignalReport/0.1 (+contact: buying-signal-admin@example.com)';
+const USER_AGENT = 'company-buying-signal-report/0.1 (+https://apify.com/m_ctim/company-buying-signal-report)';
 
 const TRANSIENT_STATUSES = new Set([429, 500, 502, 503, 504]);
 const MAX_ATTEMPTS = 4;
